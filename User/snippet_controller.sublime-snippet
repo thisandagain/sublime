@@ -1,0 +1,98 @@
+<snippet>
+    <content><![CDATA[
+/**
+ * ${1:class} controller.
+ *
+ * @package ${2:package}
+ * @author Andrew Sliwinski <andrew@diy.org>
+ */
+
+/**
+ * Dependencies
+ */
+var _           = require('underscore'),
+    async       = require('async'),
+    util        = require('util');
+
+var Controller  = require('./_controller'),
+    db          = require('../components/db'),
+    Event       = require('../components/event');
+
+/**
+ * Constructor
+ */
+function ${3:Class} () {
+    this.ns     = 'api_${3:ns}';
+    this.ttl    = ${4:3600};
+};
+util.inherits(${3:Class}, Controller);
+
+/**
+ * Get all
+ */
+${3:Class}.prototype.all = function (route, callback) {
+    var self = this;
+
+    self.get(route, function (err, obj) {
+        if (obj) return callback(err, obj);
+        ${5}
+        self.set(route, result, callback);
+    });
+};
+
+/**
+ * Get one
+ */
+${3:Class}.prototype.one = function (route, callback) {
+    var self = this;
+
+    self.get(route, function (err, obj) {
+        if (obj) return callback(err, obj);
+        //
+        self.set(route, result, callback);
+    });
+};
+
+/**
+ * Create one
+ */
+${3:Class}.prototype.create = function (route, callback) {
+    var self    = this;
+    //
+    self.expire(route, function (e) {
+        route.request.url = route.request.url + '/' + results.insertId;
+        route.params.id = results.insertId;
+        self.one(route, callback);
+    });
+};
+
+/**
+ * Update one
+ */
+${3:Class}.prototype.update = function (route, callback) {
+    var self    = this;
+    //
+    self.expire(route, function (e) {
+        self.one(route, callback);
+    });
+};
+
+/**
+ * Delete one
+ */
+${3:Class}.prototype.destroy = function (route, callback) {
+    var self    = this;
+    //
+    self.expire(route, function (e) {
+        callback(err, null);
+    });
+};
+
+/**
+ * Export
+ */
+module.exports = new ${3:Class}();
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>controller</tabTrigger>
+</snippet>

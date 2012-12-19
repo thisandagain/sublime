@@ -1,0 +1,5 @@
+{
+    "cmd": ["make", "build"],
+    "working_dir": "${project_path:${folder}}",
+    "path": "$HOME/bin:/usr/local/bin:$PATH"
+}

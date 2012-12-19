@@ -1,0 +1,30 @@
+<snippet>
+    <content><![CDATA[
+/**
+ * ${1:Some widget.}
+ *
+ * @package ${2:package}
+ * @author Andrew Sliwinski <andrew@diy.org>
+ */
+
+/**
+ * Dependencies
+ */
+var _       = require('underscore'),
+    async   = require('async');
+
+/**
+ * Constructor
+ */
+function ${3:Class} () {
+    var self = this;  
+};
+
+/**
+ * Export
+ */
+module.exports = ${3:Class}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>class</tabTrigger>
+</snippet>

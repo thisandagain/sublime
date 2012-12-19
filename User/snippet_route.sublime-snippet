@@ -1,0 +1,107 @@
+<snippet>
+    <content><![CDATA[
+/**
+ * ${1:class} route.
+ *
+ * @package api
+ * @author Andrew Sliwinski <andrew@diy.org>
+ */
+
+/**
+ * Dependencies
+ */
+var _           = require('underscore'),
+    async       = require('async'),
+    baseit      = require('baseit'),
+
+    blacklist   = require('../components/blacklist'),
+    log         = require('../components/log'),
+    route       = require('../components/route'),
+    response    = require('../components/response'),
+
+    input       = require('../input/comment'),
+    output      = require('../output/comment'),
+    controller  = require('../controllers/comments');
+
+/**
+ * Version support
+ */
+var supportedVersions = ['1.3.0'];
+
+/**
+ * Module
+ */
+module.exports = (function () {
+
+    /**
+     * Route definitions for server.
+     *
+     * @param {Object} Server
+     */
+    var module = function (server) {
+    
+        /**
+         * ##Fetch an array of all ${1:class}.
+         *
+         * @curl https://api.diy.org${2:route}
+         */
+        server.get({path: '${2:route}', version: supportedVersions}, function (req, res) {
+            route(req, res, response, {
+                data:   function (callback, obj) {
+                    controller.all(obj, callback);
+                },
+                format: function (callback, obj) {
+                    async.map(obj.data, output, callback);
+                }
+            });
+        });
+
+        /**
+         * ##Fetch a specific ${1:class} by id.
+         *
+         * @curl https://api.diy.org${2:route}/1
+         */
+        server.get({path: '${2:route}/:uid', version: supportedVersions}, function (req, res) {
+            route(req, res, response, {
+                data:   function (callback, obj) {
+                    controller.one(obj, callback);
+                },
+                format: function (callback, obj) {
+                    output(obj.data, callback);
+                }
+            });
+        });
+
+        /**
+         * ##Create a new comment.
+         *
+         * @curl -X POST -d "" -u "testuser:password" https://api.diy.org${2:route}
+         */
+        server.post({path: '${2:route}', version: supportedVersions}, function (req, res) {
+            req.model = input;
+            route(req, res, response, {
+                policy: {
+                    maker: true
+                },
+                data:   function (callback, obj) {
+                    controller.create(obj, callback);
+                },
+                format: function (callback, obj) {
+                    output(obj.data, callback);
+                },
+                code:   201 
+            });
+        });
+    };
+
+    //
+
+    return {
+        setup:  module
+    }
+
+})();
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>route</tabTrigger>
+</snippet>

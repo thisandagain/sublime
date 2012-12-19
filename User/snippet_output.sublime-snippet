@@ -1,0 +1,31 @@
+<snippet>
+    <content><![CDATA[
+/**
+ * Output model.
+ *
+ * @package ${2:package}
+ * @author Andrew Sliwinski <andrew@diy.org>
+ */
+
+/**
+ * Dependencies
+ */
+var async   = require('async');
+
+/**
+ * Export
+ */
+module.exports = function () {
+    return function (obj, callback) {
+        try {
+
+        } catch (err) {
+            log.error(err);
+            callback('Internal Server Error');
+        }
+    };
+}();
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>output</tabTrigger>
+</snippet>

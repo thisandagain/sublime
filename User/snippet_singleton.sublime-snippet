@@ -1,0 +1,36 @@
+<snippet>
+    <content><![CDATA[
+/**
+ * ${1:Some widget.}
+ *
+ * @package ${2:package}
+ * @author Andrew Sliwinski <andrew@diy.org>
+ */
+
+/**
+ * Dependencies
+ */
+var _       = require('underscore'),
+    async   = require('async');
+
+/**
+ * Module
+ */
+module.exports = (function () {
+    
+    // ------------------------
+
+    var ${3:module} = function () {
+
+    };
+
+    // ------------------------
+    // ------------------------
+
+    return ${3:module}
+
+})();
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>singleton</tabTrigger>
+</snippet>

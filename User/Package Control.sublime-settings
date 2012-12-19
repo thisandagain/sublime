@@ -1,0 +1,9 @@
+{
+	"auto_upgrade_last_run": 1353473980,
+	"installed_packages":
+	[
+		"LESS",
+		"Package Control",
+		"Sublime-JSHint"
+	]
+}

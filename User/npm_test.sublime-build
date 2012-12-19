@@ -1,0 +1,6 @@
+{
+    "selector": "index.js",
+    "cmd": ["npm", "test"],
+    "working_dir": "${project_path:${folder}}",
+    "path": "$HOME/bin:/usr/local/bin:$PATH"
+}
